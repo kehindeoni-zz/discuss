@@ -25,8 +25,12 @@ var db = {
   },
 
   find(key) {
-    var value = client.get(key);
-    return value && JSON.parse(value) || null;
+    return new Promise(function(resolve, reject) {
+      client.get(key, function(err, value) {
+        if (err) return reject(err);
+        resolve(value);
+      });
+    })
   }
 }
 

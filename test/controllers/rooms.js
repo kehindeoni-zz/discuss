@@ -50,16 +50,5 @@ describe('Rooms', () => {
           });
       });
     })
-
-    // it('gets a single campaign', function(done) {
-    //   request(app)
-    //     .get('/campaigns/1')
-    //     .expect(200)
-    //     .end(function(err, res) {
-    //       if (err) return done(err)
-    //       expect(res.body).to.eql({ data: sessionMock });
-    //       done()
-    //     })
-    // });
   });
 });

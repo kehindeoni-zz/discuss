@@ -8,35 +8,29 @@ module.exports = {
   apiKey: apiKey,
 
   createSession(sessionName) {
-    var session = this;
-    return new Promise(function(resolve, reject) {
-      var sessionId = session.getSessionId(sessionName);
+    return this.getSessionId(sessionName)
+      .then(function(sessionId) {
+        if (!sessionId) {
+          return new Promise(function(resolve, reject) {
+            opentok.createSession({ mediaMode: 'routed' }, function(err, session) {
+              if (err) {
+                reject(err);
+              }
 
-      if (!sessionId) {
-        return opentok.createSession({ mediaMode: 'routed' }, function(err, session) {
-          if (err) {
-            reject(err);
-            return console.log(err);
-          }
-          sessionId = session.sessionId;
+              sessionId = session.sessionId;
 
-          db.save(sessionName + 'Session', sessionId);
-          resolve(sessionId);
-        });
-      }
-
-      resolve(sessionId);
-    });
+              db.save(sessionName + 'Session', sessionId);
+              return resolve(sessionId);
+            });
+          });
+        }
+        return sessionId;
+      });
   },
 
   getSessionId(sessionName) {
     var key = sessionName + 'Session';
     return db.find(key);
-  },
-
-  getToken(sessionName) {
-    var sessionId = this.getSessionId(sessionName);
-    return this.getTokenFromId(sessionId);
   },
 
   getTokenFromId(sessionId) {
