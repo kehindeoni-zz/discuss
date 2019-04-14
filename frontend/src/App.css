@@ -1,0 +1,6 @@
+
+.tagLine {
+  height: 50px;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
