@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var usersRouter = require('./users');
+var roomsRouter = require('./rooms');
 var campaignsRouter = require('./campaigns');
 
-router.use('/users', usersRouter);
+router.use('/rooms', roomsRouter);
 router.use('/campaigns', campaignsRouter);
 
 /* GET home page. */
