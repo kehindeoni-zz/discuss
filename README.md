@@ -20,7 +20,7 @@ $ cd discuss
 $ npm install
 $ npm test //To run API tests
 $ npm run dev // To start API server
-$ Add `.env` file to `discuss` root directory and set values for OPENTOK_KEY and OPENTOK_SECRET
+$ Copy `.env.sample` to `.env` and supply the values
 ```
 
 This runs on port 3000
