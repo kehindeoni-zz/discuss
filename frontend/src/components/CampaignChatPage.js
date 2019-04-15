@@ -82,7 +82,7 @@ export class CampaignChatPage extends Component {
       <div className="container">
         <Alert errorMessage={ errorMessage } />
         <div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-          <div className="bg-dark mr-md-3 pt-3 px-3 pt-md-2 px-md-2 col-md-7 text-center text-white overflow-hidden">             
+          <div className="bg-dark mr-md-3 pt-3 px-3 pt-md-2 px-md-2 col-md-7 text-center text-white overflow-hidden video">             
             <div className="videos">
               <div id="publisher" className="publisher"></div>
               { this.displayVideoChatButton() }

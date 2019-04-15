@@ -5,7 +5,7 @@ const requestOptions = {
 
 export default {
 	get(path) {
-		return fetch(`http://localhost:3000/${path}`, requestOptions)
+		return fetch(`http://localhost:3000/api/${path}`, requestOptions)
 			.then(handleResponse)
 			.then(function(data) {
 					return data;

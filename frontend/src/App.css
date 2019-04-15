@@ -25,3 +25,7 @@
   height: 225px;
   color: #eceeef;
 }
+
+.video {
+  max-height: 420px;
+}
