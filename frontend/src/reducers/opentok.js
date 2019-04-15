@@ -16,4 +16,3 @@ export function opentok(state = DEFAULT_STATE, action) {
       return state
   }
 }
-

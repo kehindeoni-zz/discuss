@@ -6,7 +6,6 @@ const mapStateToProps = (state) => {
   const { campaign: { fetching, campaign } } = state;
   const { opentok: { subscribers, joinedVideoChat } } = state;
   const { alert: { errorMessage } } = state;
-  console.log(state.alert.message, 'statattattat===', errorMessage, campaign)
 
   return {
     fetching,
@@ -16,7 +15,7 @@ const mapStateToProps = (state) => {
     errorMessage
   }
 }
-  
+
 const mapDispatchToProps = (dispatch) => {
   return {
     readCampaign: (campaignId) => { dispatch(readCampaign(campaignId))},
@@ -24,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
     endVideoChat: () => {dispatch(disconnectOpentok())}
   }
 }
-  
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

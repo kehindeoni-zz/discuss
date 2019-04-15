@@ -2,7 +2,7 @@ import React from 'react';
 
 const Alert = (props) => {
   const { errorMessage } = props;
-  
+
   if(!errorMessage) return null;
 
   return (

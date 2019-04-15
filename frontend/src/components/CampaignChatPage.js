@@ -50,7 +50,7 @@ export class CampaignChatPage extends Component {
 
   componentDidMount() {
     const campaignId  =  this.props.match.params.id 
-    this.props.readCampaign(campaignId)
+    this.props.readCampaign(campaignId);
   }
 
   componentWillUnmount() {
@@ -70,14 +70,14 @@ export class CampaignChatPage extends Component {
   }
   
   startVideoChat() {
-    const campaignId  =  this.props.match.params.id 
+    const campaignId = this.props.match.params.id 
     this.props.startVideoChat(campaignId);
   }
 
   render() {
     const { campaign, fetching, errorMessage, subscribers } = this.props;
     if (fetching || !campaign) return <Loader />;
-  
+
     return (
       <div className="container">
         <Alert errorMessage={ errorMessage } />
@@ -109,4 +109,3 @@ export class CampaignChatPage extends Component {
 }
 
 export default CampaignChatPage;
-

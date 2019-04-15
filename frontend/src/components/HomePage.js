@@ -51,7 +51,7 @@ export class HomePage extends Component {
 
   joinDiscussion(campaign) {
     const campaignId =  campaign.id;
-    this.props.readCampaign(campaignId, this.props)
+    this.props.readCampaign(campaignId, this.props);
   }
 
   displayCampaigns() {
@@ -95,4 +95,3 @@ export class HomePage extends Component {
 }
 
 export default HomePage;
-

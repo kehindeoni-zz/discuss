@@ -14,14 +14,14 @@ const mapStateToProps = (state) => {
     viewingCampaign
   }
 }
-  
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getCampaigns: () => { dispatch(getCampaigns())},
     readCampaign: (campaignId, props) => { dispatch(readCampaign(campaignId, props))}
   }
 }
-  
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

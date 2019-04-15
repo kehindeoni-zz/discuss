@@ -20,4 +20,3 @@ export function campaign(state = DEFAULT_STATE, action) {
       return state
   }
 }
-
