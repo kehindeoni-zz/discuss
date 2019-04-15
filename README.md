@@ -34,9 +34,11 @@ $ npm test //To run client tests
 ```
 
 ### Todos
- - Add component tests
+- Add component tests
 
+### Continuous Deployment
 
+CircleCI is deployed for continuous integration and deployment
 
-
-
+### Heroku
+Live deployment running on https://discause.herokuapp.com
