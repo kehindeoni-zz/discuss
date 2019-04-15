@@ -70,14 +70,15 @@ export class CampaignChatPage extends Component {
   }
   
   startVideoChat() {
-    const campaignId = this.props.match.params.id 
+    const campaignId = this.props.match.params.id;
+    console.log(campaignId, 'campaignid');
     this.props.startVideoChat(campaignId);
   }
 
   render() {
     const { campaign, fetching, errorMessage, subscribers } = this.props;
     if (fetching || !campaign) return <Loader />;
-
+  
     return (
       <div className="container">
         <Alert errorMessage={ errorMessage } />

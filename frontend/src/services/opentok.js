@@ -12,9 +12,11 @@ export default {
   publisher: null,
   subscribers: [],
   getRoom(roomId) {
+    console.log(roomId, '==============roomid');
     return fetchApi.get(`rooms/${roomId}`);
   },
   initialize(credentials, dispatch) {
+    console.log(credentials, '========credentials');
     var apiKey = credentials.apiKey;
     var sessionId = credentials.sessionId;
     var token = credentials.token;
@@ -30,6 +32,7 @@ export default {
       height: '100%'
     }, (err) => {
       if(err) {
+        console.log('hhhhhhh--======///////////////////====', err)
         switch (err.name) {
           case "OT_NOT_CONNECTED":
             handleError(`Can't publish your video. You are not connected to the internet`, dispatch);
@@ -45,6 +48,7 @@ export default {
       } else {
         // Connect to the session
         session.connect(token, function(error) {
+          console.log('00000000000000',error )
           // If the connection is successful, initialize a publisher and publish to the session
           if (error) {
             handleError('An error occured, please refresh and try again');
@@ -84,11 +88,13 @@ export default {
     // Subscribe to a newly created stream
     var self = this;
     session.on('streamCreated', function(event) {
+      console.log(event, 'hhuuuuuu');
       self.subscribeToSession(event, dispatch);
     }).on('sessionDisconnected', function(event) {
       console.log(event.reason);
       dispatch(videoCallDisconnected());
     }).on('connectionCreated', function(event) {
+      console.log('uuuuuuu-========================', event);
       dispatch(hideStartButton());
     });
   },
