@@ -8,8 +8,10 @@ import PropTypes from 'prop-types';
 export class HomePage extends Component {
   static propTypes = {
     campaigns: PropTypes.array,
-    fetching: PropTypes.bool,
     errorMessage: PropTypes.string,
+    fetching: PropTypes.bool,
+    getCampaigns: PropTypes.func,
+    readCampaign: PropTypes.func,
     campaign: PropTypes.shape({
       facts: PropTypes.object,
       title: PropTypes.string,
@@ -20,8 +22,8 @@ export class HomePage extends Component {
   static defaultProps = {
     getCampaigns: () => {},
     readCampaign: () => {},
-    fetching: false,
     errorMessage: '',
+    fetching: false,
     campaign: {
       facts: {
         problem: ''
