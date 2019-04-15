@@ -21,12 +21,15 @@ client.on('error', function(err) {
 
 var db = {
   save(key, data) {
+    console.log('saving key', key)
     client.set(key, data);
   },
 
   find(key) {
+    console.log('finding key')
     return new Promise(function(resolve, reject) {
       client.get(key, function(err, value) {
+        console.log('found or nah', err, value)
         if (err) return reject(err);
         resolve(value);
       });

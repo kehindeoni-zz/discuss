@@ -49,6 +49,7 @@ export function getRoomCredentials(roomId) {
         dispatch(initializeOpentok(response.data));
       })
       .catch((error) => {
+        console.log(error, 'error in here')
         dispatch(alertErrorMessage('Error Occured while trying to join the conversation'));
       });
   };
