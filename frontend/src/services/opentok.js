@@ -53,11 +53,12 @@ export default {
               if(error) {
                 switch (error.name) {
                   case "OT_NOT_CONNECTED":
-                    handleError(`Can't publish your video. You are not connected to the internet`, dispatch);
-                    break;
+                    return handleError(`Can't publish your video. You are not connected to the internet`, dispatch);
                   default:
-                    handleError('An unknown error occured', dispatch);
+                    return handleError('An unknown error occured', dispatch);
                 }
+              } else {
+                dispatch(hideStartButton());
               }
             });
           }
@@ -91,7 +92,7 @@ export default {
       console.log(event.reason);
       dispatch(videoCallDisconnected());
     }).on('connectionCreated', function(event) {
-      dispatch(hideStartButton());
+      console.log('Connection created');
     });
   },
   disconnectOpentok(dispatch) {

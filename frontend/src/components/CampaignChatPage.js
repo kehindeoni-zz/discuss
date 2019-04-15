@@ -65,6 +65,24 @@ export class CampaignChatPage extends Component {
     return (<button type="button" className="btn btn-success videoButton" onClick={this.startVideoChat}>Click to Join Video Chat</button>);
   }
 
+  displaySolution(campaign) {
+    const solution = campaign.solutions.copy.raw || campaign.facts.solution
+    if (!solution) return;
+
+    return (
+      <p><strong>Solution: </strong>{solution}</p>
+    );
+  }
+
+  displayProblem(campaign) {
+    const problem = campaign.facts.problem;
+    if (!problem) return;
+
+    return (
+      <p><strong>Problem: </strong>{problem}</p>
+    );
+  }
+
   endVideoChat() {
     this.props.endVideoChat && this.props.endVideoChat();
   }
@@ -77,7 +95,7 @@ export class CampaignChatPage extends Component {
   render() {
     const { campaign, fetching, errorMessage, subscribers } = this.props;
     if (fetching || !campaign) return <Loader />;
-  
+
     return (
       <div className="container">
         <Alert errorMessage={ errorMessage } />
@@ -91,8 +109,8 @@ export class CampaignChatPage extends Component {
           <div className="bg-light mr-md-3 pt-3 px-3 pt-md-3 px-md-3 text-center overflow-hidden">
             <div className="my-3 p-3">
               <h2 className="display-5">{campaign.title}</h2>
-              <p className="lead"><strong>Problem:</strong> {campaign.facts.problem}</p>
-              <p className="lead"><strong>Solution:</strong> {campaign.solutions.copy.raw}</p>
+              { this.displayProblem(campaign) }
+              { this.displaySolution(campaign) }
             </div>
           </div>
         </div>
