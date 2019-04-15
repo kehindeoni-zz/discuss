@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Loader from './Loader.js';
+import Alert from './Alert.js';
 
 export class HomePage extends Component {
   constructor(props) {
@@ -45,25 +46,12 @@ export class HomePage extends Component {
     });
   }
 
-  renderErrorMessage() {
-    const { errorMessage } = this.props
-    if(!errorMessage) return;
-
-    return (
-      <div className="alert alert-danger" role="alert">
-        { errorMessage }
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    );
-  }
-
   render() {
     return (
       <div className="container">
         <div className="row">
-          { this.renderErrorMessage() }
+          <Alert errorMessage={this.props.errorMessage} />
+          {/* { this.renderErrorMessage() } */}
           { this.displayCampaigns() }
         </div>
       </div>

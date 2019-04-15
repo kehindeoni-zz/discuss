@@ -3,9 +3,10 @@ import CampaignChatPage from '../components/CampaignChatPage';
 import { readCampaign, getRoomCredentials, disconnectOpentok } from '../actions';
 
 const mapStateToProps = (state) => {
-  const { fetching, campaign } = state.campaign;
-  const { subscribers, joinedVideoChat } = state.opentok;
-  const { errorMessage } = state.alert;
+  const { campaign: { fetching, campaign } } = state;
+  const { opentok: { subscribers, joinedVideoChat } } = state;
+  const { alert: { errorMessage } } = state;
+  console.log(state.alert.message, 'statattattat===', errorMessage, campaign)
 
   return {
     fetching,

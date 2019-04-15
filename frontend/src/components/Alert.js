@@ -4,7 +4,7 @@ const Alert = (props) => {
   const { errorMessage } = props;
 
   if(!errorMessage) return null;
-  
+  console.log('rhhrhhr', errorMessage)
   return (
     <div className="alert alert-danger" role="alert">
       { errorMessage }

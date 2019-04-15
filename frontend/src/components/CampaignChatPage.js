@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import Loader from './Loader.js';
+import Alert from './Alert.js';
 
 export class CampaignChatPage extends Component {
   constructor(props) {
@@ -36,27 +37,13 @@ export class CampaignChatPage extends Component {
     this.props.startVideoChat(campaignId);
   }
 
-  renderErrorMessage() {
-    const { errorMessage } = this.props
-    if(!errorMessage) return;
-
-    return (
-      <div className="alert alert-danger" role="alert">
-        { errorMessage }
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    );
-  }
-
   render() {
-    const { campaign, fetching } = this.props;
+    const { campaign, fetching, errorMessage } = this.props;
     if (fetching || !campaign) return <Loader />;
-
+  
     return (
       <div className="container">
-        { this.renderErrorMessage() }
+        <Alert errorMessage={ errorMessage } />
         <div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
           <div className="bg-dark mr-md-3 pt-3 px-3 pt-md-2 px-md-2 col-md-7 text-center text-white overflow-hidden">             
             <div className="videos">
