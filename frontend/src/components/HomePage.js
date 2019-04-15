@@ -3,7 +3,41 @@ import '../App.css';
 import Loader from './Loader.js';
 import Alert from './Alert.js';
 
+import PropTypes from 'prop-types';
+
 export class HomePage extends Component {
+  static propTypes = {
+    campaigns: PropTypes.array,
+    fetching: PropTypes.bool,
+    errorMessage: PropTypes.string,
+    campaign: PropTypes.shape({
+      facts: PropTypes.object,
+      title: PropTypes.string,
+      cover_image: PropTypes.object
+    })
+  }
+
+  static defaultProps = {
+    getCampaigns: () => {},
+    readCampaign: () => {},
+    fetching: false,
+    errorMessage: '',
+    campaign: {
+      facts: {
+        problem: ''
+      },
+      title: '',
+      cover_image: {
+        default: '',
+        sizes: {
+          landscape: {
+            uri: ''
+          }
+        }
+      }
+    }
+  }
+
   constructor(props) {
     super(props);
     this.joinDiscussion = this.joinDiscussion.bind(this);
@@ -30,7 +64,7 @@ export class HomePage extends Component {
       return (
         <div className="col-md-4" key={i} >
           <div className="card mb-4 shadow-sm">
-            <img alt="" src={coverImage} style={{width:"100%", height:"225", color:"#eceeef"}} />
+            <img alt="" src={coverImage} className="campaignImage" />
             <div className="card-body">
               <p className="card-text">{campaign.title}</p>
               <p className="card-text tagLine">{campaign.facts.problem}</p>
