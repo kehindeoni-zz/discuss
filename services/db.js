@@ -26,7 +26,6 @@ client.on('error', function(err) {
 var db = {
   save(key, data) {
     client.set(key, data);
-    client.print()
   },
 
   find(key) {
