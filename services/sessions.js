@@ -10,21 +10,16 @@ module.exports = {
   createSession(sessionName) {
     return this.getSessionId(sessionName)
     .then(function(sessionId) {
-        console.log(sessionName, 'sessIONNAMEEE');
         if (!sessionId) {
-          console.log('no sessionidddd')
           return new Promise(function(resolve, reject) {
             opentok.createSession({ mediaMode: 'routed' }, function(err, session) {
               if (err) {
-                console.log('opentok error')
                 reject(err);
               }
 
               sessionId = session.sessionId;
-              console.log('session id=======', sessionId)
 
               db.save(sessionName + 'Session', sessionId);
-              console.log('saved yeahhhhhh')
               return resolve(sessionId);
             });
           });
@@ -35,7 +30,6 @@ module.exports = {
 
   getSessionId(sessionName) {
     var key = sessionName + 'Session';
-    console.log(key, 'got called')
     return db.find(key);
   },
 
