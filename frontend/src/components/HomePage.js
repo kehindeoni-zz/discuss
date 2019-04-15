@@ -49,9 +49,8 @@ export class HomePage extends Component {
   render() {
     return (
       <div className="container">
+        <Alert errorMessage={this.props.errorMessage} />
         <div className="row">
-          <Alert errorMessage={this.props.errorMessage} />
-          {/* { this.renderErrorMessage() } */}
           { this.displayCampaigns() }
         </div>
       </div>
