@@ -55,9 +55,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: npm run client
-
   deploy-master:
     docker:
       - image: buildpack-deps:trusty

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run client && node ./bin/www",
-    "client": "rm -rf public && cd frontend && npm run build",
+    "postinstall": "cd frontend && npm install && npm run build",
+    "start": "node ./bin/www",
     "dev": "./node_modules/.bin/nodemon DEBUG=app:* ./bin/www",
     "test": "mocha --exit --recursive --reporter dot 'test/**/*.js'"
   },
