@@ -20,7 +20,7 @@ describe('Campaign', () => {
   describe('#Get', function() {
     it('gets all campaigns', function(done) {
       request(app)
-        .get('/campaigns')
+        .get('/api/campaigns')
         .expect(200)
         .end(function(err, res) {
           if (err) return done(err)
@@ -32,7 +32,7 @@ describe('Campaign', () => {
 
     it('gets a single campaign', function(done) {
       request(app)
-        .get('/campaigns/1')
+        .get('/api/campaigns/1')
         .expect(200)
         .end(function(err, res) {
           if (err) return done(err)

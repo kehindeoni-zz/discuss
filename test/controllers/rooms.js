@@ -20,7 +20,7 @@ describe('Rooms', () => {
     context('success fetching', function(done) {
       it('for roomMame', function(done) {
         request(app)
-          .get('/rooms/firstRoom')
+          .get('/api/rooms/firstRoom')
           .expect(200)
           .end(function(err, res) {
             if (err) return done(err)
@@ -36,7 +36,7 @@ describe('Rooms', () => {
 
       it('for no roomName', function(done) {
         request(app)
-          .get('/rooms')
+          .get('/api/rooms')
           .expect(200)
           .end(function(err, res) {
             if (err) return done(err)
