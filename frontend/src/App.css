@@ -4,3 +4,8 @@
   overflow: hidden;
   -webkit-line-clamp: 2;
 }
+
+.publisher {
+  width: 100%;
+  height: 350px;
+}
