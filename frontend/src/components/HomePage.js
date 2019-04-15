@@ -24,8 +24,8 @@ export class HomePage extends Component {
 
     return campaigns.map((campaign, i) => {
       let coverImage = campaign.cover_image.default;
-      coverImage = (coverImage && coverImage.sizes.landscape.uri) || '';
-
+      coverImage = (coverImage && coverImage.sizes.landscape.uri) || 'https://picsum.photos/g/348/196';
+      
       return (
         <div className="col-md-4" key={i} >
           <div className="card mb-4 shadow-sm">
