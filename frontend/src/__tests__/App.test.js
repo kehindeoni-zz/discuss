@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import Adapter from 'enzyme-adapter-react-16';
 import { Route } from 'react-router-dom';
 
-import App from './App';
+import App from '../App';
 
 configure({ adapter: new Adapter() });
 
-import { store } from './store';
+import { store } from '../store';
 
 export const CustomProvider = ({ children }) => {
   return (

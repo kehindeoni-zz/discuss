@@ -1,6 +1,6 @@
 import { opentokConstant } from '../constants';
 
-const DEFAULT_STATE = { subscribers: [] };
+const DEFAULT_STATE = { subscribers: [], fetching: false };
 
 export function opentok(state = DEFAULT_STATE, action) {
   switch (action.type) {
