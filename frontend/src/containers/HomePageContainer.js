@@ -3,12 +3,15 @@ import HomePage from '../components/HomePage';
 import { getCampaigns, readCampaign} from '../actions';
 
 const mapStateToProps = (state) => {
-  const { campaign } = state;
+  const { campaign, campaigns, fetching, viewingCampaign } = state.campaign;
+  const { errorMessage } = state.alert;
+
   return {
-    fetching: campaign.fetching,
-    campaigns: campaign.campaigns,
-    campaign: campaign.campaign,
-    viewingCampaign: campaign.viewingCampaign
+    fetching,
+    campaigns,
+    campaign,
+    errorMessage,
+    viewingCampaign
   }
 }
   

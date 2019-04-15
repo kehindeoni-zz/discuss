@@ -1,5 +1,6 @@
 import campaignService from '../services/campaigns';
-import { campaignConstant } from '../constants/campaign';
+import { campaignConstant } from '../constants';
+import { alertErrorMessage } from './alert';
 
 export function getCampaignsStart() {
   return {
@@ -19,6 +20,7 @@ export function getCampaignsFailure() {
     type: campaignConstant.GET_CAMPAIGNS_FAILURE
   };
 }
+
 export function readCampaignStart() {
   return {
     type: campaignConstant.READ_CAMPAIGN_START
@@ -45,7 +47,8 @@ export function getCampaigns() {
       .then((response) => {
         dispatch(getCampaignsSuccess(response.data.data));
       })
-      .catch((error) => {
+      .catch(() => {
+        dispatch(alertErrorMessage('Error loading campaigns'));
         dispatch(getCampaignsFailure());
       });
   };
@@ -62,6 +65,7 @@ export function readCampaign(campaignId, props) {
         dispatch(readCampaignSuccess(response.data.data));
       })
       .catch((error) => {
+        dispatch(alertErrorMessage('Error loading campaigns'));
         dispatch(readCampaignFailure());
       });
   };

@@ -7,6 +7,7 @@ export class CampaignChatPage extends Component {
     super(props);
 
     this.startVideoChat = this.startVideoChat.bind(this);
+    this.endVideoChat = this.endVideoChat.bind(this);
   }
 
   componentDidMount() {
@@ -14,29 +15,53 @@ export class CampaignChatPage extends Component {
     this.props.readCampaign(campaignId)
   }
 
+  componentWillUnmount() {
+    this.endVideoChat();
+  }
+
+  displayVideoChatButton() {
+    if(this.props.joinedVideoChat) {
+      return (<button type="button" className="btn btn-danger videoButton" onClick={this.endVideoChat}>Leave Video Chat</button>);
+    }
+
+    return (<button type="button" className="btn btn-success videoButton" onClick={this.startVideoChat}>Click to Join Video Chat</button>);
+  }
+
+  endVideoChat() {
+    this.props.endVideoChat && this.props.endVideoChat();
+  }
+  
   startVideoChat() {
     const campaignId  =  this.props.match.params.id 
     this.props.startVideoChat(campaignId);
   }
 
-  componentWillUnmount() {
-    this.props.endVideoChat();
+  renderErrorMessage() {
+    const { errorMessage } = this.props
+    if(!errorMessage) return;
+
+    return (
+      <div className="alert alert-danger" role="alert">
+        { errorMessage }
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    );
   }
 
-  componentWillReceiveProps() {
-    console.log(this.props, 'updated props')
-  }
   render() {
     const { campaign, fetching } = this.props;
     if (fetching || !campaign) return <Loader />;
 
     return (
       <div className="container">
+        { this.renderErrorMessage() }
         <div className="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
           <div className="bg-dark mr-md-3 pt-3 px-3 pt-md-2 px-md-2 col-md-7 text-center text-white overflow-hidden">             
             <div className="videos">
               <div id="publisher" className="publisher"></div>
-              <button type="button" className="btn btn-success startButton" onClick={this.startVideoChat}>Click to Join Video Chat</button>
+              { this.displayVideoChatButton() }
             </div>
           </div>
           <div className="bg-light mr-md-3 pt-3 px-3 pt-md-3 px-md-3 text-center overflow-hidden">

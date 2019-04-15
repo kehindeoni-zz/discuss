@@ -45,10 +45,25 @@ export class HomePage extends Component {
     });
   }
 
+  renderErrorMessage() {
+    const { errorMessage } = this.props
+    if(!errorMessage) return;
+
+    return (
+      <div className="alert alert-danger" role="alert">
+        { errorMessage }
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="container">
         <div className="row">
+          { this.renderErrorMessage() }
           { this.displayCampaigns() }
         </div>
       </div>

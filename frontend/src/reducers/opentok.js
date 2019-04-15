@@ -1,17 +1,17 @@
-import { opentokConstant } from '../constants/opentok';
+import { opentokConstant } from '../constants';
 
-const DEFAULT_STATE = { opentokCredentials: {}, isFetching: false, subscribers: [] };
+const DEFAULT_STATE = { subscribers: [] };
 
 export function opentok(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case opentokConstant.INITIALIZE_OPENTOK_START:
-      return Object.assign({}, state, { fetching: true, viewingopentok: false });
-    case opentokConstant.INITIALIZE_OPENTOK_SUCCESS:
-      return Object.assign({}, state, { fetching: false, opentoks: action.opentoks, viewingopentok: false });
-    case opentokConstant.INITIALIZE_OPENTOK_FAILURE:
-      return Object.assign({}, state, { fetching: false, viewingopentok: false });
+      return Object.assign({}, state, { fetching: true, errorMessage: '' });
     case opentokConstant.UPDATE_SUBSCRIBERS_LIST:
-        return Object.assign({}, state, { subscribers: action.subscribers });
+      return Object.assign({}, state, { subscribers: action.subscribers });
+    case opentokConstant.HIDE_START_BUTTON:
+      return Object.assign({}, state, { joinedVideoChat: true });
+    case opentokConstant.VIDEO_CALL_DISCONNECTED:
+      return Object.assign({}, state, { joinedVideoChat: false, errorMessage: '' });
     default:
       return state
   }

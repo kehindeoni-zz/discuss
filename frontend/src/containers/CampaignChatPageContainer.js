@@ -4,12 +4,15 @@ import { readCampaign, getRoomCredentials, disconnectOpentok } from '../actions'
 
 const mapStateToProps = (state) => {
   const { fetching, campaign } = state.campaign;
-  const { subscribers } = state.opentok;
+  const { subscribers, joinedVideoChat } = state.opentok;
+  const { errorMessage } = state.alert;
 
   return {
-    fetching: fetching,
-    campaign: campaign,
-    subscribers: subscribers
+    fetching,
+    campaign,
+    subscribers,
+    joinedVideoChat,
+    errorMessage
   }
 }
   

@@ -1,12 +1,11 @@
-import { updateSubscribersList } from '../actions/opentok';
-import fetchApi from './api'
+import { updateSubscribersList, hideStartButton, videoCallDisconnected } from '../actions/opentok';
+import { alertErrorMessage } from '../actions/alert';
+import fetchApi from './api';
 
 let session = {};
 
-function handleError(error) {
-  if (error) {
-    alert(error.message);
-  }
+function handleError(errorMessage, dispatch) {
+  dispatch(alertErrorMessage(errorMessage));
 }
 
 export default {
@@ -15,11 +14,12 @@ export default {
   getRoom(roomId) {
     return fetchApi.get(`rooms/${roomId}`);
   },
-  initialize: (credentials, dispatch) => {
+  initialize(credentials, dispatch) {
     var apiKey = credentials.apiKey;
     var sessionId = credentials.sessionId;
     var token = credentials.token;
     session = window.OT.initSession(apiKey, sessionId);
+    var self = this;
 
     this.initListeners(dispatch);
 
@@ -28,23 +28,44 @@ export default {
       insertMode: 'append',
       width: '100%',
       height: '100%'
-    }, handleError);
-  
-    // Connect to the session
-    session.connect(token, function(error) {
-      // If the connection is successful, initialize a publisher and publish to the session
-      if (error) {
-        handleError(error);
-      } else {
-        // dispatch this
-        if(session.isConnected) {
-          console.log('connecteeedddd')
+    }, (err) => {
+      if(err) {
+        switch (err.name) {
+          case "OT_NOT_CONNECTED":
+            handleError(`Can't publish your video. You are not connected to the internet`, dispatch);
+            break;
+          case "OT_USER_MEDIA_ACCESS_DENIED":
+          case "OT_NO_DEVICES_FOUND":
+            handleError('Error: No devices found. Please grant access to device and refresh the page', dispatch)
+            break;
+          default:
+            handleError('An unknown error occured', dispatch);
         }
-        session.publish(this.publisher, handleError);
+        self.destroyPublisher();
+      } else {
+        // Connect to the session
+        session.connect(token, function(error) {
+          // If the connection is successful, initialize a publisher and publish to the session
+          if (error) {
+            handleError('An error occured, please refresh and try again');
+          } else {
+            session.publish(self.publisher, (error) => {
+              if(error) {
+                switch (error.name) {
+                  case "OT_NOT_CONNECTED":
+                    handleError(`Can't publish your video. You are not connected to the internet`, dispatch);
+                    break;
+                  default:
+                    handleError('An unknown error occured', dispatch);
+                }
+              }
+            });
+          }
+        });
       }
     });
   },
-  subscribeSubscriber(evt, dispatch) {
+  subscribeToSession(evt, dispatch) {
     if (evt.stream) {
       const subscriberId = `subscriber-${evt.stream.streamId}`
       this.subscribers = [...this.subscribers, subscriberId];
@@ -54,26 +75,28 @@ export default {
         insertMode: 'replace',
         width: '100%',
         height: '100%'
-      }, handleError);
+      }, (err) => {
+        handleError('An error occured while trying to join the call', dispatch)
+      });
     }
   },
   initListeners(dispatch) {
     // Subscribe to a newly created stream
+    var self = this;
     session.on('streamCreated', function(event) {
-      this.subscribeSubscriber(event, dispatch);
+      self.subscribeToSession(event, dispatch);
     }).on('sessionDisconnected', function(event) {
-      console.log('this this this')
+      console.log(event.reason);
+      dispatch(videoCallDisconnected());
     }).on('connectionCreated', function(event) {
-      console.log(event, 'lets seee')
+      dispatch(hideStartButton());
     });
   },
-  disconnectOpentok() {
-    console.log('get called')
+  disconnectOpentok(dispatch) {
     session.disconnect && session.disconnect();
     this.destroyPublisher();
-    console.log('disconnectedddd')
   },
-  disconnectPublisher() {
+  destroyPublisher() {
     // this stops the publishing of audio and video
     this.publisher && this.publisher.destroy();
     this.publisher = null;
