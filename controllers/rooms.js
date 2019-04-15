@@ -5,8 +5,8 @@ module.exports = {
     var roomName = req.params.roomName || 'lounge';
 
     session.createSession(roomName)
-      console.log(roomName, 'roomName')
-      .then(function(sessionId) {
+    .then(function(sessionId) {
+        console.log(roomName, 'roomName');
         if (!sessionId) {
           console.log('no session id')
           return res.sendStatus(400);
