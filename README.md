@@ -17,10 +17,10 @@ To begin installation, clone this repository.
 
 ```sh
 $ cd discuss
+$ // Copy `.env.sample` to `.env` and supply the values
 $ npm install
 $ npm test //To run API tests
 $ npm run dev // To start API server
-$ Copy `.env.sample` to `.env` and supply the values
 ```
 
 This runs on port 3000
@@ -34,7 +34,7 @@ $ npm test //To run client tests
 ```
 
 ### Todos
- - Add client side tests
+ - Add component tests
 
 
 
