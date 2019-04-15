@@ -1,5 +1,5 @@
-var apiKey = process.env.OPENTOK_KEY
-var apiSecret = process.env.OPENTOK_SECRET
+var apiKey = process.env.OPENTOK_KEY;
+var apiSecret = process.env.OPENTOK_SECRET;
 var OpenTok = require('opentok');
 var db = require('./db');
 var opentok = new OpenTok(apiKey, apiSecret);

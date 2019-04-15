@@ -21,7 +21,7 @@ client.on('error', function(err) {
 
 var db = {
   save(key, data) {
-    client.set(key, JSON.stringify(data));
+    client.set(key, data);
   },
 
   find(key) {
