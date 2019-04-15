@@ -76,7 +76,9 @@ export default {
         width: '100%',
         height: '100%'
       }, (err) => {
-        handleError('An error occured while trying to join the call', dispatch)
+        if (err) {
+          handleError('An error occured while trying to join the call', dispatch)
+        }
       });
     }
   },
