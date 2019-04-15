@@ -40,16 +40,13 @@ export function initializeOpentok(credentials) {
 }
 
 export function getRoomCredentials(roomId) {
-  console.log('ggggggggggg=======', roomId);
   return dispatch => {
     dispatch(initializeOpentokStart());
     return OpentokService.getRoom(roomId)
       .then((response) => {
-        console.log('============', response);
         dispatch(initializeOpentok(response.data));
       })
       .catch((error) => {
-        console.log(error, 'error in here')
         dispatch(alertErrorMessage('Error Occured while trying to join the conversation'));
       });
   };
