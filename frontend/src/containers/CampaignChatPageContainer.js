@@ -1,19 +1,23 @@
 import { connect } from 'react-redux';
 import CampaignChatPage from '../components/CampaignChatPage';
-import { readCampaign} from '../actions';
+import { readCampaign, getRoomCredentials, disconnectOpentok } from '../actions';
 
 const mapStateToProps = (state) => {
-  const { campaign } = state;
-  console.log(campaign, 'jfjjfjjf')
+  const { fetching, campaign } = state.campaign;
+  const { subscribers } = state.opentok;
+
   return {
-    fetching: campaign.fetching,
-    campaign: campaign.campaign
+    fetching: fetching,
+    campaign: campaign,
+    subscribers: subscribers
   }
 }
   
 const mapDispatchToProps = (dispatch) => {
   return {
-    readCampaign: (campaignId) => { dispatch(readCampaign(campaignId))}
+    readCampaign: (campaignId) => { dispatch(readCampaign(campaignId))},
+    startVideoChat: (roomId) => {dispatch((getRoomCredentials(roomId)))},
+    endVideoChat: () => {dispatch(disconnectOpentok())}
   }
 }
   
