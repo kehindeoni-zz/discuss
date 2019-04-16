@@ -83,6 +83,17 @@ export class CampaignChatPage extends Component {
     );
   }
 
+  displayAlternateText(campaign) {
+    const problemText = this.displayProblem(campaign);
+    const solutionText = this.displaySolution(campaign);
+
+    if (!problemText && !solutionText) {
+      return (
+        <p>Looks like there's no informmation about this campaign.</p>
+      )
+    }
+  }
+
   endVideoChat() {
     this.props.endVideoChat && this.props.endVideoChat();
   }
@@ -111,6 +122,8 @@ export class CampaignChatPage extends Component {
               <h2 className="display-5">{campaign.title}</h2>
               { this.displayProblem(campaign) }
               { this.displaySolution(campaign) }
+              { this.displayAlternateText(campaign) }
+              <span><strong>Would love to discuss about this topic? Click the button to start or join the discussion.</strong></span>
             </div>
           </div>
         </div>
